@@ -74,7 +74,12 @@ export class ModInterface {
         document.head.appendChild(element);
     }
 
-    registerSprite(spriteId, base64string) {
+    /**
+     * @param {string} spriteId
+     * @param {string} base64string
+     * @deprecated Use ModInterfaceV2#registerSprite instead
+     */
+    registerSpriteLegacy(spriteId, base64string) {
         const img = new Image();
 
         const sprite = new AtlasSprite(spriteId);
@@ -274,14 +279,14 @@ export class ModInterface {
             });
 
             if (combination.regularImageBase64) {
-                this.registerSprite(
+                this.registerSpriteLegacy(
                     "sprites/buildings/" + buildingIdentifier + ".png",
                     combination.regularImageBase64
                 );
             }
 
             if (combination.blueprintImageBase64) {
-                this.registerSprite(
+                this.registerSpriteLegacy(
                     "sprites/blueprints/" + buildingIdentifier + ".png",
                     combination.blueprintImageBase64
                 );
@@ -568,11 +573,11 @@ export class ModInterface {
             buildingIdOrClass + (variant === defaultBuildingVariant ? "" : "-" + variant) + ".png";
 
         if (regularBase64) {
-            this.registerSprite("sprites/buildings/" + spriteId, regularBase64);
+            this.registerSpriteLegacy("sprites/buildings/" + spriteId, regularBase64);
         }
 
         if (blueprintBase64) {
-            this.registerSprite("sprites/blueprints/" + spriteId, blueprintBase64);
+            this.registerSpriteLegacy("sprites/blueprints/" + spriteId, blueprintBase64);
         }
     }
 

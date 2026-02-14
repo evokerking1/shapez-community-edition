@@ -1,6 +1,6 @@
 import { makeOffscreenBuffer } from "./buffer_utils";
-import { AtlasSprite, BaseSprite, RegularSprite, SpriteAtlasLink } from "./sprites";
 import { Logger } from "./logging";
+import { AtlasSprite, BaseSprite, RegularSprite, REQUIRED_SPRITE_SCALES, SpriteAtlasLink } from "./sprites";
 
 /**
  * @typedef {import("../application").Application} Application
@@ -186,7 +186,7 @@ class LoaderImpl {
         canvas.src = "not-found";
 
         const sprite = new AtlasSprite("not-found");
-        ["0.1", "0.25", "0.5", "0.75", "1"].forEach(resolution => {
+        REQUIRED_SPRITE_SCALES.forEach(resolution => {
             sprite.linksByResolution[resolution] = new SpriteAtlasLink({
                 packedX: 0,
                 packedY: 0,
