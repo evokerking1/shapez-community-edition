@@ -28,7 +28,7 @@ import {
 } from "../game/shape_definition";
 import { THEMES } from "../game/theme";
 import { LANGUAGES } from "../languages";
-import { matchDataRecursive, T } from "../translations";
+import { matchDataRecursive } from "../translations";
 import { ModMetaBuilding } from "./mod_meta_building";
 
 /**
@@ -254,7 +254,6 @@ export class ModInterface {
         }
         gMetaBuildingRegistry.register(metaClass);
         const metaInstance = gMetaBuildingRegistry.findByClass(metaClass);
-        T.buildings[id] = {};
 
         metaClass.getAllVariantCombinations().forEach(combination => {
             const variant = combination.variant || defaultBuildingVariant;
@@ -266,17 +265,6 @@ export class ModInterface {
             registerBuildingVariant(uniqueTypeId, metaClass, variant, rotationVariant);
 
             gBuildingVariants[id].metaInstance = metaInstance;
-
-            this.registerTranslations("en", {
-                buildings: {
-                    [id]: {
-                        [variant]: {
-                            name: combination.name || "Name",
-                            description: combination.description || "Description",
-                        },
-                    },
-                },
-            });
 
             if (combination.regularImageBase64) {
                 this.registerSpriteLegacy(
