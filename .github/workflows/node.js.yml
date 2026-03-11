@@ -1,0 +1,46 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch: 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
+    - name: Setup java
+      uses: actions/setup-java@v5
+      with:
+         distribution: 'temurin'
+         java-version: '21'
+    - name: Install FFMPEG
+      run: |
+        sudo apt update
+        sudo apt install ffmpeg -y
+
+    - name: Install dependencies in the root folder
+      run: npm ci
+    - name: Install dependencies in the electron folder
+      run: |
+         cd electron
+         npm ci
+    - name: Build all
+      run: npm run package-all
+    - name: Zip output folder
+      run: zip shapezce.zip build_output/standalone -r
+
+
