@@ -40,7 +40,17 @@ jobs:
          npm ci
     - name: Build all
       run: npm run package-all
-    - name: Zip output folder
-      run: zip shapezce.zip build_output/standalone -r
+    - name: Zip MacOs arm64 output folder
+      run: zip shapez-darwin-arm64.zip build_output/standalone/shapez-darwin-arm64 -r
+    - name: Zip MacOs x64 output
+      run: zip shapez-darwin-x64.zip build_output/standalone/shapez-darwin-x64 -r
+    - name: Zip windows x64 output
+      run: zip shapez-windows-x64.zip build_output/standalone/shapez-win32-x64 -r
+    - name: Zip windows arm64 output
+      run: zip shapez-windows-arm64.zip build_output/standalone/shapez-win32-arm64 -r
+    - name: Zip linux x64 output
+      run: zip shapez-linux-x64.zip build_output/standalone/shapez-linux-x64 -r
+    - name: Zip linux arm64 output
+      run: zip shapez-linux-arm64.zip build_output/standalone/shapez-linux-arm64 -r
 
 
