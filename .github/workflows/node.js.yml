@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
@@ -41,16 +41,57 @@ jobs:
     - name: Build all
       run: npm run package-all
     - name: Zip MacOs arm64 output folder
-      run: zip shapez-darwin-arm64.zip build_output/standalone/shapez-darwin-arm64 -r
+      run: zip ./shapez-darwin-arm64.zip build_output/standalone/shapez-darwin-arm64 -r
+
+    - name: Upload MacOs arm64 build
+      uses: actions/upload-artifact@v4
+      with:
+        name: Mac Arm64
+        path: ./shapez-darwin-arm64.zip
+        
     - name: Zip MacOs x64 output
-      run: zip shapez-darwin-x64.zip build_output/standalone/shapez-darwin-x64 -r
+      run: zip ./shapez-darwin-x64.zip build_output/standalone/shapez-darwin-x64 -r
+
+    - name: Upload MacOs x64 build
+      uses: actions/upload-artifact@v4
+      with:
+        name: Mac x64
+        path: ./shapez-darwin-x64.zip
+    
     - name: Zip windows x64 output
-      run: zip shapez-windows-x64.zip build_output/standalone/shapez-win32-x64 -r
+      run: zip ./shapez-windows-x64.zip build_output/standalone/shapez-win32-x64 -r
+
+    - name: Upload Windows x64 build
+      uses: actions/upload-artifact@v4
+      with:
+        name: Windows x64
+        path: ./shapez-windows-x64.zip
+      
     - name: Zip windows arm64 output
-      run: zip shapez-windows-arm64.zip build_output/standalone/shapez-win32-arm64 -r
-    - name: Zip linux x64 output
-      run: zip shapez-linux-x64.zip build_output/standalone/shapez-linux-x64 -r
-    - name: Zip linux arm64 output
-      run: zip shapez-linux-arm64.zip build_output/standalone/shapez-linux-arm64 -r
+      run: zip ./shapez-windows-arm64.zip build_output/standalone/shapez-win32-arm64 -r
+
+    - name: Upload Windows arm64 build
+      uses: actions/upload-artifact@v4
+      with:
+        name: Windows arm64
+        path: ./shapez-windows-arm64.zip
+
+    - name: Zip Linux x64 output
+      run: zip ./shapez-linux-x64.zip build_output/standalone/shapez-linux-x64 -r
+      
+    - name: Upload Linux x64 build
+      uses: actions/upload-artifact@v4
+      with:
+        name: Linux arm64
+        path: ./shapez-linux-x64.zip
+
+    - name: Zip Linux arm64 output
+      run: zip ./shapez-linux-arm64.zip build_output/standalone/shapez-linux-arm64 -r
+      
+    - name: Upload Linux arm64 build
+      uses: actions/upload-artifact@v4
+      with:
+        name: Linux arm64
+        path: ./shapez-linux-arm64.zip
 
 
