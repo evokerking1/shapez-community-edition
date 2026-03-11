@@ -82,7 +82,7 @@ jobs:
     - name: Upload Linux x64 build
       uses: actions/upload-artifact@v4
       with:
-        name: Linux arm64
+        name: Linux x64
         path: ./shapez-linux-x64.zip
 
     - name: Zip Linux arm64 output
